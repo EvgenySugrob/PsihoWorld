@@ -20,29 +20,84 @@ bool URetroFPSAttributeSet::PreGameplayEffectExecute(FGameplayEffectModCallbackD
 	if (Data.EvaluatedData.Magnitude > 0)
 	{
 
-		if (Data.EvaluatedData.Attribute == GetArmorAttribute() && GetArmor() + AbsoluteMagnitude >= 100)
+		if (Data.EvaluatedData.Attribute == GetArmorAttribute())
+
 		{
-			SetArmor(100);
-			return false;
+
+			if (GetArmor() + AbsoluteMagnitude >= 100)
+
+			{
+
+				SetArmor(100);
+
+				return false;
+
+			}
+
+			else
+
+			{
+
+				Armor.SetCurrentValue(Armor.GetCurrentValue() + AbsoluteMagnitude);
+
+				return false;
+
+			}
+
 		}
 
-		if (Data.EvaluatedData.Attribute == GetHealthAttribute() && GetHealth() + AbsoluteMagnitude >= 100)
+
+
+		if (Data.EvaluatedData.Attribute == GetHealthAttribute())
+
 		{
-			SetHealth(100);
-			return false;
+
+			if (GetHealth() + AbsoluteMagnitude >= 100)
+
+			{
+
+				SetHealth(100);
+
+				return false;
+
+			}
+
+			else
+
+			{
+
+				Health.SetCurrentValue(Health.GetCurrentValue() + AbsoluteMagnitude);
+
+				return false;
+
+			}
+
 		}
 
-		//if (Data.EvaluatedData.Attribute == GetHealthAttribute() && GetArmor() <= 0)  //Необходимо пофиксить расчет здоровья
-		//{																				//Оставив как есть, то при подборе здоровья после урона, здоровье прибаляется к тому значению, которое было изначально
-		//	Health.SetCurrentValue(Health.GetCurrentValue() + AbsoluteMagnitude);		//Если добавить эту строку, после подбора брони, здоровье прибавляется к нулевому значению
+
+		//if (Data.EvaluatedData.Attribute == GetArmorAttribute() && GetArmor() + AbsoluteMagnitude >= 100)
+		//{
+		//	SetArmor(100);
 		//	return false;
 		//}
 
-		if (Data.EvaluatedData.Attribute == GetArmorAttribute() && GetArmor() <= 0)
-		{
-			SetArmor(0);
+		//if (Data.EvaluatedData.Attribute == GetHealthAttribute() && GetHealth() + AbsoluteMagnitude >= 100)
+		//{
+		//	SetHealth(100);
+		//	return false;
+		//}
 
-		}
+		////if (Data.EvaluatedData.Attribute == GetHealthAttribute() && GetArmor() <= 0)  //Необходимо пофиксить расчет здоровья
+		////{																				//Оставив как есть, то при подборе здоровья после урона, здоровье прибаляется к тому значению, которое было изначально
+		////	Health.SetCurrentValue(Health.GetCurrentValue() + AbsoluteMagnitude);		//Если добавить эту строку, после подбора брони, здоровье прибавляется к нулевому значению
+		////	return false;
+		////}
+
+		//if (Data.EvaluatedData.Attribute == GetArmorAttribute() && GetArmor() <= 0)
+		//{
+		//	SetArmor(0);
+
+		//}
 	}
 	else
 	{
